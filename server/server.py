@@ -1,0 +1,95 @@
+# Python 3 server example
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
+import sqlite3
+from urllib.parse import unquote
+
+# server IP addr and port
+hostName = "localhost"
+serverPort = 8080
+
+
+def getDBresponse(query) -> str:
+    con = sqlite3.connect("server/database.db")
+    cur = con.cursor()
+    response = ""
+    try:
+        # add table data row by row
+        for row in cur.execute(query):
+            for item in row:
+                response = response + str(item) + "|"
+            response = response[:len(response)-1] + "\n"
+           # add column names
+        cols = ""
+        for description in cur.description:
+            cols = cols + description[0] + "|"
+        cols = cols[:len(cols)-1] + "\n"
+        response = "\n" + cols + response
+    except Exception as e:
+        #response = "Message from server: Query is Unsuccessful."
+        response = "\nResponse from server: " + str(e) + "\n"
+    con.close()
+    return response
+
+
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        # relative path is used
+        if self.path == "/":
+            content_type = "text/html"
+            file_path = "server/resources/index.html"
+        elif self.path == "/server/resources/client.css":
+            content_type = "text/css"
+            file_path = self.path[1:]
+        elif self.path == "/server/resources/query.js":
+            content_type = "text/javascript"
+            file_path = self.path[1:]
+        elif self.path == "/favicon.ico":
+            content_type = "image/x-icon"
+            file_path = "server/images/favicon.ico"
+        elif self.path.startswith("/get?query="):
+            # serving dynamic db query data
+            # query format example: "/get?query=select+*+from+product"
+            # print(self.path)
+            path = unquote(self.path)
+            # print(path)
+            # decode url encoding
+            query = path[len("/get?query="):]
+            print(query)
+            response = getDBresponse(query)
+
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            self.wfile.write(bytes(response, "utf-8"))
+
+            return
+        else:
+            print("PATH NOT RECOGNIZED")
+            print("Ignoring problem")
+            print(self.path)
+            self.send_response(200)
+            self.send_header("Content-type", "text/plain")
+            self.end_headers()
+            return
+
+        # sending static files
+        self.send_response(200)
+        self.send_header("Content-type", content_type)
+        self.end_headers()
+        with open(file_path, 'rb') as fd:
+            self.wfile.write(fd.read())
+
+
+if __name__ == "__main__":
+    webServer = HTTPServer((hostName, serverPort), MyServer)
+    print("Server started http://%s:%s" % (hostName, serverPort))
+
+    try:
+        webServer.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+    webServer.server_close()
+    print("Server stopped.")
