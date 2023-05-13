@@ -1,3 +1,176 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    vertical-align: baseline;
+    border: 0;
+    background-color: black;
+}
+
+#bg-colorer {
+    background-color: #ff8080;
+}
+
+.bg-black {
+    background-color: black;
+}
+
 h1 {
     text-align: center;
+    background-color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: red;
+    padding: 15px 0px;
+    cursor: default;
+}
+
+.flex {
+    display: flex;
+}
+
+#header {
+    height: 50px;
+    padding: 5px 0px;
+    background-color: black;
+}
+
+.header-elem {
+    color: white;
+    padding: 0px 15px;
+    /*transition: color 0.1s;*/
+    cursor: pointer;
+}
+
+.header-elem:hover {
+    color: gray;
+}
+
+#sec1 {
+    width: 100%;
+}
+
+.sec1-elem {
+    background-color: black;
+    /*set initial size = 0 and grow from there (not starting from original size)*/
+    flex-basis: 0;
+}
+
+#sec1-elem1 {
+    flex-grow: 1.9;
+
+}
+
+
+#sec1-elem2 {
+    background-color: black;
+    color: white;
+    flex-grow: 1;
+    font-size: 30px;
+    font-style: italic;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5% 5%;
+
+}
+
+.word {
+    display: inline;
+    margin: 0;
+    /*background-color: green;*/
+    cursor: default;
+}
+
+#sec1-elem2-1 {
+    text-align: start;
+}
+
+#sec1-elem2-2 {
+    text-align: center;
+}
+
+#sec1-elem2-3 {
+    text-align: end;
+}
+
+
+/*constraint img size to maximum of parent's size only (which is more by default)*/
+.img {
+    max-width: 100%;
+    display: block;
+}
+
+#sec2 {
+    margin-top: 5px;
+    padding: 11px 0 15px 10%;
+    background-color: blue;
+    display: block;
+    color: white;
+    background-color: black;
+}
+
+#inst {
+    font-size: 30px;
+    padding-bottom: 10px;
+}
+
+input[type="text"] {
+    font-size: 18px;
+    width: 80%;
+    background-color: bisque;
+}
+
+#status-icon {
+    width: 2%;
+    display: inline;
+
+}
+
+#query-read {
+    width: 80%;
+}
+
+#status-text {
+    color: red;
+}
+
+
+#res-wrapper {
+    background-color: black;
+    padding: 0 10%;
+}
+
+/*create horizontal scroll bar if size of table exceeds size of div*/
+#response {
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 70vh;
+    width: 100%;
+    background-color: bisque;
+    border: 2px solid #ff8080;
+}
+
+table,
+th,
+td {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+#spacer {
+    height: 15vh;
+}
+
+/*zebra-striped table*/
+tr:nth-child(even) {
+    background-color: #d2d1d1;
+}
+
+.event-disabled {
+    pointer-events: none;
 }

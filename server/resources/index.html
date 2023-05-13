@@ -10,16 +10,54 @@
 </head>
 
 <body>
-    <div>
-        <h1 id="title">Netflix Database Query</h1>
-        <!-- 1 img, 1 text-->
-        <div>
-            <p>Enter your query here</p>
-            <input type="text">
+    <div id="bg-colorer">
+        <div class="flex" id="header">
+            <img class="header-elem" src="/server/images/netflix-logo.png">
+            <p class="header-elem">Home</p>
+            <p class="header-elem">Products</p>
+            <p class="header-elem">Reference</p>
         </div>
-        <p id="test"></p>
+        <h1 id="title">Netflix Database Query</h1>
+        <div class="flex" id="sec1">
+            <div class="sec1-elem" id="sec1-elem1"><img class="img" src="/server/images/db-users.jpg"></div>
+            <div class="sec1-elem" id="sec1-elem2">
+                <p class="word" id="sec1-elem2-1">Easy.</p>
+                <p class="word" id="sec1-elem2-2">Efficient.</p>
+                <p class="word" id="sec1-elem2-3">Fast.</p>
+            </div>
+        </div>
+        <div id="sec2">
+            <div id="inst">Enter your query here</div>
+            <input type="text" id="tx-field">
+            <button type="button" id="bt">Submit</button>
+            <img id="status-icon">
+            <div id="query-read">Your query: ...</div>
+            <div id="status-text">Query status ...</div>
+        </div>
+        <div id="res-wrapper">
+            <div id="response">
+                <table>
+                    <tr>
+                        <th>Category 1</th>
+                        <th>Category 2</th>
+                        <th>Category 3</th>
+                    </tr>
+                    <tr>
+                        <td>a</td>
+                        <td>b</td>
+                        <td>c</td>
+                    </tr>
+                    <tr>
+                        <td>d</td>
+                        <td>e</td>
+                        <td>f</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="spacer"></div>
+        </div>
     </div>
-    <script src="/server/resources/query.js"></script>
+    <script src="/server/resources/body.js"></script>
 </body>
 
 </html>
